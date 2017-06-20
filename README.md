@@ -1,19 +1,21 @@
-ËÕÄşÅÀ³æ
+è‹å®çˆ¬è™«
 ===
-ËÕÄşscrapyÅÀ³æ,ÒÀ¾İËÑË÷ÒıÇæÊµÏÖÖ¸¶¨ÉÌÆ·ÅÀ³æ²¢½«ÉÌÆ·²ÎÊıÓëÆÀÂÛÏÂÔØÈë¿â¡£
-ÒÀÀµ
+è‹å®scrapyçˆ¬è™«,ä¾æ®æœç´¢å¼•æ“å®ç°æŒ‡å®šå•†å“çˆ¬è™«å¹¶å°†å•†å“å‚æ•°ä¸è¯„è®ºä¸‹è½½å…¥åº“ã€‚
+
+ä¾èµ–
 ===
-scrapy
-redis
-mongodb
-Ê¹ÓÃ
+	scrapy
+	redis
+	mongodb
+	pyqt5
+ä½¿ç”¨
 ===
 	$ git clone ssh://git@42.123.127.93:10022/bujue/suning.git
 	$ cd suning
 	$ python start.py
-·Ö²¼Ê½ÅÀ³æÅäÖÃ
+åˆ†å¸ƒå¼çˆ¬è™«é…ç½®
 ===
-ÔÚsuning/suning/settings.pyÖĞ
+åœ¨suning/suning/settings.pyä¸­
 ```python
 # -*- coding: utf-8 -*-
 
@@ -33,7 +35,7 @@ NEWSPIDER_MODULE = 'suning.spiders'
 
 ROBOTSTXT_OBEY = False
 
-#Ëæ»úä¯ÀÀÆ÷
+#éšæœºæµè§ˆå™¨
 USER_AGENTS = [
 	"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowser; .NET CLR 1.1.4322; .NET CLR 2.0.50727)",
 	"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Acoo Browser; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.0.04506)",
@@ -53,7 +55,7 @@ USER_AGENTS = [
 	"Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; fr) Presto/2.9.168 Version/11.52",
 ]
 
-#´úÀíip
+#ä»£ç†ip
 PROXIES = [
 
 	{'ip_port':'117.93.132.94:8998','user_pass':''},
@@ -62,7 +64,7 @@ PROXIES = [
 
 SPIDER_MIDDLEWARES = {
     #'suning.middlewares.SuningSpiderMiddleware': 543,
-    'suning.middlewares.RandomUserAgent': 1, #Ëæ»úuser agent'
+    'suning.middlewares.RandomUserAgent': 1, #éšæœºuser agent'
 }
 
 
@@ -70,42 +72,42 @@ ITEM_PIPELINES = {
     'suning.pipelines.SuningPipeline': 300,
 }
 
-#´Ë´¦ÅäÖÃMongodbÊı¾İ¿â£¬ÓÃÓÚ´æ´¢×îÖÕÅÀÈ¡ÏÂÀ´µÄÊı¾İ
-MONGODB_SERVER = "localhost" #´Ë´¦ÅäÖÃredis,·şÎñÆ÷Ê¹ÓÃ127.0.0.1/localhost ¼´¿É,´Ó»úÔÚ´Ë´¦ÌîÖ÷»úµÄipµØÖ·,¼´¼¯ÖĞ´æ´¢Êı¾İÓÚ·şÎñÆ÷ÉÏ
-MONGODB_PORT = 27017   #¶Ë¿ÚºÅ
-MONGODB_DB = "pipeline_db"  #Êı¾İ¿âÃû
-MONGODB_COLLECTION = "suning"    #±íÃû
+#æ­¤å¤„é…ç½®Mongodbæ•°æ®åº“ï¼Œç”¨äºå­˜å‚¨æœ€ç»ˆçˆ¬å–ä¸‹æ¥çš„æ•°æ®
+MONGODB_SERVER = "localhost" #æ­¤å¤„é…ç½®redis,æœåŠ¡å™¨ä½¿ç”¨127.0.0.1/localhost å³å¯,ä»æœºåœ¨æ­¤å¤„å¡«ä¸»æœºçš„ipåœ°å€,å³é›†ä¸­å­˜å‚¨æ•°æ®äºæœåŠ¡å™¨ä¸Š
+MONGODB_PORT = 27017   #ç«¯å£å·
+MONGODB_DB = "pipeline_db"  #æ•°æ®åº“å
+MONGODB_COLLECTION = "suning"    #è¡¨å
 
-#´Ë´¦ÅäÖÃredisÊı¾İ¿â£¬ÓÃÓÚ´æ´¢ÅÀÈ¡µÄurl
+#æ­¤å¤„é…ç½®redisæ•°æ®åº“ï¼Œç”¨äºå­˜å‚¨çˆ¬å–çš„url
 DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
 SCHEDULER = "scrapy_redis.scheduler.Scheduler"
 SCHEDULER_PERSIST = True
 SCHEDULER_QUEUE_CLASS = "scrapy_redis.queue.SpiderPriorityQueue"
-REDIS_HOST = '127.0.0.1' #´Ë´¦ÅäÖÃredis,·şÎñÆ÷Ê¹ÓÃ 127.0.0.1/localhost ¼´¿É,´Ó»úÔÚ´Ë´¦ÌîÖ÷»úµÄipµØÖ·
+REDIS_HOST = '127.0.0.1' #æ­¤å¤„é…ç½®redis,æœåŠ¡å™¨ä½¿ç”¨ 127.0.0.1/localhost å³å¯,ä»æœºåœ¨æ­¤å¤„å¡«ä¸»æœºçš„ipåœ°å€
 REDIS_PORT= 6379
 ```
 
 
-×¢:±¾´ÎÏîÄ¿Ã»ÓĞÊ¹ÓÃ´úÀíip,ÈôÒªÊ¹ÓÃ,Ö»ĞèĞŞ¸Äsuninh/suninh/settings.pyÖĞ
+æ³¨:æœ¬æ¬¡é¡¹ç›®æ²¡æœ‰ä½¿ç”¨ä»£ç†ip,è‹¥è¦ä½¿ç”¨,åªéœ€ä¿®æ”¹suninh/suninh/settings.pyä¸­
 ```python
 DOWNLOADER_MIDDLEWARES = {
 #    'cnblogs.middlewares.MyCustomDownloaderMiddleware': 543,
-    'suninh.middlewares.RandomUserAgent': 1, #Ëæ»úuser agent
-    #'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 110, #´úÀíĞèÒªÓÃµ½
-    #'suninh.middlewares.ProxyMiddleware': 100, #´úÀíĞèÒªÓÃµ½
+    'suninh.middlewares.RandomUserAgent': 1, #éšæœºuser agent
+    #'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 110, #ä»£ç†éœ€è¦ç”¨åˆ°
+    #'suninh.middlewares.ProxyMiddleware': 100, #ä»£ç†éœ€è¦ç”¨åˆ°
 }
 ```
-ĞŞ¸ÄÎª
+ä¿®æ”¹ä¸º
 ```python
 DOWNLOADER_MIDDLEWARES = {
 #    'cnblogs.middlewares.MyCustomDownloaderMiddleware': 543,
-    'suninh.middlewares.RandomUserAgent': 1, #Ëæ»úuser agent
-    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 110, #´úÀíĞèÒªÓÃµ½
-    'suninh.middlewares.ProxyMiddleware': 100, #´úÀíĞèÒªÓÃµ½
+    'suninh.middlewares.RandomUserAgent': 1, #éšæœºuser agent
+    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 110, #ä»£ç†éœ€è¦ç”¨åˆ°
+    'suninh.middlewares.ProxyMiddleware': 100, #ä»£ç†éœ€è¦ç”¨åˆ°
 }
 ```
-²¢ÔÚsuninh/suninh/settings.pyÖĞ
-#´úÀíip
+å¹¶åœ¨suninh/suninh/settings.pyä¸­
+#ä»£ç†ip
 ```python
 PROXIES = [
 	
@@ -113,5 +115,5 @@ PROXIES = [
 	
 ]
 ```
-ÖĞ¼ÓÈëÓĞĞ§´úÀíip¼´¿É
+ä¸­åŠ å…¥æœ‰æ•ˆä»£ç†ipå³å¯
 
